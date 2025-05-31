@@ -144,7 +144,165 @@ document.addEventListener('DOMContentLoaded', () => {
                 table.classList.add('min-w-full');
             }
         });
+        
+        // 为重要日期部分创建时间轴
+        createTimelineForImportantDates();
+        
         lucide.createIcons();
+    }
+
+    function createTimelineForImportantDates() {
+        const importantDatesSection = document.getElementById('important-dates-content');
+        if (!importantDatesSection) return;
+
+        const ul = importantDatesSection.querySelector('ul');
+        if (!ul) return;
+
+        const listItems = Array.from(ul.querySelectorAll('li'));
+        if (listItems.length === 0) return;
+
+        // 解析日期和事件
+        const timelineEvents = [];
+        listItems.forEach(li => {
+            const strongElement = li.querySelector('strong');
+            if (strongElement) {
+                const dateText = strongElement.textContent.replace(':', '').trim();
+                const eventText = li.textContent.replace(strongElement.textContent, '').trim();
+                
+                // 处理嵌套的子事件
+                const subList = li.querySelector('ul');
+                let subEvents = [];
+                if (subList) {
+                    subEvents = Array.from(subList.querySelectorAll('li')).map(subLi => 
+                        subLi.textContent.trim()
+                    );
+                }
+                
+                timelineEvents.push({
+                    date: dateText,
+                    event: eventText,
+                    subEvents: subEvents,
+                    originalElement: li
+                });
+            }
+        });
+
+        if (timelineEvents.length === 0) return;
+
+        // 创建时间轴HTML
+        const timelineHTML = `
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-slate-700 mb-4 border-b pb-2">2. 重要的日期和里程碑</h2>
+                <p class="text-slate-600 mb-6">以下是入学前需要关注的关键日期：</p>
+                
+                <div class="timeline-container relative">
+                    <div class="timeline-line absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-green-500"></div>
+                    ${timelineEvents.map((event, index) => `
+                        <div class="timeline-item relative flex items-start mb-8 pl-20" data-index="${index}">
+                            <div class="timeline-marker absolute left-6 w-4 h-4 bg-white border-4 border-blue-500 rounded-full shadow-lg z-10 transition-all duration-300 hover:scale-125"></div>
+                            <div class="timeline-content bg-white rounded-lg shadow-md p-6 flex-1 border-l-4 border-blue-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                                <div class="timeline-date text-sm font-semibold text-blue-600 mb-2 flex items-center">
+                                    <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                                    ${event.date}
+                                </div>
+                                <div class="timeline-event text-slate-700 font-medium mb-2">
+                                    ${event.event}
+                                </div>
+                                ${event.subEvents.length > 0 ? `
+                                    <div class="timeline-sub-events mt-3 pl-4 border-l-2 border-slate-200">
+                                        ${event.subEvents.map(subEvent => `
+                                            <div class="text-sm text-slate-600 mb-1 flex items-start">
+                                                <i data-lucide="arrow-right" class="w-3 h-3 mr-2 mt-0.5 text-slate-400"></i>
+                                                ${subEvent}
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <div class="flex items-center mb-2">
+                        <i data-lucide="info" class="w-5 h-5 text-blue-600 mr-2"></i>
+                        <span class="font-semibold text-blue-800">重要提醒</span>
+                    </div>
+                    <p class="text-blue-700 text-sm">
+                        请务必关注这些关键日期，及时完成相关手续。建议将重要日期添加到您的日历中，并设置提醒。
+                    </p>
+                </div>
+            </div>
+        `;
+
+        // 替换原有内容
+        importantDatesSection.innerHTML = timelineHTML;
+        
+        // 添加时间轴动画
+        setTimeout(() => {
+            animateTimeline();
+        }, 100);
+    }
+
+    function animateTimeline() {
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        if (timelineItems.length === 0) return;
+
+        // 创建观察器来触发动画
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const item = entry.target;
+                    const index = parseInt(item.dataset.index);
+                    
+                    // 延迟动画，创建连续效果
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateX(0)';
+                        
+                        // 标记点动画
+                        const marker = item.querySelector('.timeline-marker');
+                        if (marker) {
+                            marker.style.transform = 'scale(1)';
+                            marker.style.borderColor = getMarkerColor(index);
+                        }
+                    }, index * 200);
+                }
+            });
+        }, {
+            threshold: 0.3
+        });
+
+        // 初始化样式并观察元素
+        timelineItems.forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateX(-50px)';
+            item.style.transition = 'all 0.6s ease-out';
+            
+            const marker = item.querySelector('.timeline-marker');
+            if (marker) {
+                marker.style.transform = 'scale(0)';
+                marker.style.transition = 'all 0.4s ease-out';
+            }
+            
+            observer.observe(item);
+        });
+    }
+
+    function getMarkerColor(index) {
+        const colors = [
+            '#3b82f6', // blue-500
+            '#8b5cf6', // violet-500
+            '#06b6d4', // cyan-500
+            '#10b981', // emerald-500
+            '#f59e0b', // amber-500
+            '#ef4444', // red-500
+            '#8b5cf6', // violet-500
+            '#06b6d4', // cyan-500
+            '#10b981', // emerald-500
+            '#f59e0b', // amber-500
+        ];
+        return colors[index % colors.length];
     }
 
     function setupAccordions() {

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUS MTech EBAC 新生指南</title>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script type="module" src="https://esm.run/framer-motion"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-100 text-slate-800">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <i data-lucide="graduation-cap" class="h-8 w-8 mr-2"></i>
+                    <h1 class="text-xl font-semibold text-slate-700">NUS MTech EBAC 入学指南</h1>
+                </div>
+                <div class="hidden md:flex items-center space-x-4">
+                    <input type="search" id="searchInput" placeholder="搜索页面内容..." class="px-3 py-2 border border-slate-300 rounded-md text-sm focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                </div>
+                <div class="md:hidden">
+                    <button id="mobileMenuButton" class="text-slate-600 hover:text-blue-600 p-2">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <nav id="mainNav" class="bg-slate-50 border-b border-t border-slate-200">
+            <ul class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:space-x-6 py-2 overflow-x-auto whitespace-nowrap">
+                <li><a href="#welcome" class="nav-link text-slate-600 hover:text-blue-600 py-2 block">欢迎与概览</a></li>
+                <li><a href="#important-dates" class="nav-link text-slate-600 hover:text-blue-600 py-2 block">重要日期</a></li>
+                <li><a href="#registration" class="nav-link text-slate-600 hover:text-blue-600 py-2 block">注册入学</a></li>
+                <li><a href="#pre-enrollment" class="nav-link text-slate-600 hover:text-blue-600 py-2 block">入学前手续</a></li>
+                <li><a href="#academic-info" class="nav-link text-slate-600 hover:text-blue-600 py-2 block">学术信息</a></li>
+                <li><a href="#fees" class="nav-link text-slate-600 hover:text-blue-600 py-2 block">学费</a></li>
+                <li><a href="#equipment" class="nav-link text-slate-600 hover:text-blue-600 py-2 block">设备要求</a></li>
+                <li><a href="#campus-life" class="nav-link text-slate-600 hover:text-blue-600 py-2 block">校园生活</a></li>
+                <li><a href="#international-students" class="nav-link text-slate-600 hover:text-blue-600 py-2 block">国际学生</a></li>
+                <li><a href="#course-timetable" class="nav-link text-slate-600 hover:text-blue-600 py-2 block">课程时间表</a></li>
+                <li><a href="#contact-support" class="nav-link text-slate-600 hover:text-blue-600 py-2 block">联系支持</a></li>
+            </ul>
+        </nav>
+        <div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg py-2">
+             <input type="search" id="mobileSearchInput" placeholder="搜索..." class="w-full px-4 py-3 mb-2 border-b border-slate-200 text-sm">
+             <a href="#welcome" class="nav-link-mobile block px-4 py-3 text-slate-600 hover:bg-slate-100">欢迎与概览</a>
+             <a href="#important-dates" class="nav-link-mobile block px-4 py-3 text-slate-600 hover:bg-slate-100">重要日期</a>
+             <a href="#registration" class="nav-link-mobile block px-4 py-3 text-slate-600 hover:bg-slate-100">注册入学</a>
+             <a href="#pre-enrollment" class="nav-link-mobile block px-4 py-3 text-slate-600 hover:bg-slate-100">入学前手续</a>
+             <a href="#academic-info" class="nav-link-mobile block px-4 py-3 text-slate-600 hover:bg-slate-100">学术信息</a>
+             <a href="#fees" class="nav-link-mobile block px-4 py-3 text-slate-600 hover:bg-slate-100">学费</a>
+             <a href="#equipment" class="nav-link-mobile block px-4 py-3 text-slate-600 hover:bg-slate-100">设备要求</a>
+             <a href="#campus-life" class="nav-link-mobile block px-4 py-3 text-slate-600 hover:bg-slate-100">校园生活</a>
+             <a href="#international-students" class="nav-link-mobile block px-4 py-3 text-slate-600 hover:bg-slate-100">国际学生</a>
+             <a href="#course-timetable" class="nav-link-mobile block px-4 py-3 text-slate-600 hover:bg-slate-100">课程时间表</a>
+             <a href="#contact-support" class="nav-link-mobile block px-4 py-3 text-slate-600 hover:bg-slate-100">联系支持</a>
+        </div>
+    </header>
+
+    <main id="mainContent" class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <div id="loader" class="flex justify-center items-center h-64">
+            <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
+        </div>
+
+        <div id="page-title-container" class="mb-8"></div>
+
+        <section id="welcome" class="content-section mb-12 p-6 bg-white rounded-xl shadow-lg">
+            <div id="welcome-content" class="prose prose-slate max-w-none"></div>
+        </section>
+
+        <section id="important-dates" class="content-section mb-12 p-6 bg-white rounded-xl shadow-lg">
+            <div id="important-dates-content" class="prose prose-slate max-w-none"></div>
+        </section>
+
+        <section id="registration" class="content-section mb-12 p-6 bg-white rounded-xl shadow-lg">
+            <div id="registration-content" class="prose prose-slate max-w-none"></div>
+        </section>
+
+        <section id="pre-enrollment" class="content-section mb-12 p-6 bg-white rounded-xl shadow-lg">
+            <div id="pre-enrollment-content" class="prose prose-slate max-w-none"></div>
+        </section>
+        
+        <section id="academic-info" class="content-section mb-12 p-6 bg-white rounded-xl shadow-lg">
+            <h2 class="text-2xl font-semibold text-slate-700 mb-4 border-b pb-2">学术信息</h2>
+            <div id="orientation-schedule-content" class="prose prose-slate max-w-none mb-6"></div>
+        </section>
+
+        <section id="fees" class="content-section mb-12 p-6 bg-white rounded-xl shadow-lg">
+            <div id="fees-content" class="prose prose-slate max-w-none"></div>
+        </section>
+
+        <section id="equipment" class="content-section mb-12 p-6 bg-white rounded-xl shadow-lg">
+            <div id="laptop-requirements-content" class="prose prose-slate max-w-none"></div>
+        </section>
+
+        <section id="campus-life" class="content-section mb-12 p-6 bg-white rounded-xl shadow-lg">
+             <h2 class="text-2xl font-semibold text-slate-700 mb-4 border-b pb-2">校园生活与服务</h2>
+            <div id="campus-services-content" class="prose prose-slate max-w-none"></div>
+        </section>
+
+        <section id="international-students" class="content-section mb-12 p-6 bg-white rounded-xl shadow-lg">
+            <div id="international-students-content" class="prose prose-slate max-w-none"></div>
+        </section>
+
+        <section id="course-timetable" class="content-section mb-12 p-6 bg-white rounded-xl shadow-lg">
+            <div id="course-timetable-content" class="prose prose-slate max-w-none"></div>
+        </section>
+
+        <section id="contact-support" class="content-section mb-12 p-6 bg-white rounded-xl shadow-lg">
+            <h2 class="text-2xl font-semibold text-slate-700 mb-4 border-b pb-2">联系方式与支持</h2>
+            <div id="contact-support-content" class="prose prose-slate max-w-none"></div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-slate-300 py-8 text-center">
+        <p>本指南基于NUS MTech EBAC官方信息整理，所有信息仅供参考，如有变动请以官方通知为准。</p>
+        <p>Made by Terence Yuan.</p>
+    </footer>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>

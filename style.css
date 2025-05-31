@@ -1,0 +1,196 @@
+:root {
+    --accent-color: #005BBB; /* ISS Blue */
+    --accent-color-hover: #004a99; 
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    scroll-behavior: smooth;
+    line-height: 1.6;
+}
+
+header .items-center i[data-lucide="graduation-cap"] {
+    color: var(--accent-color);
+}
+
+.nav-link.active {
+    color: var(--accent-color);
+    font-weight: 600; /* Slightly bolder for active link */
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.nav-link:hover, .nav-link-mobile:hover {
+    color: var(--accent-color-hover);
+}
+
+.nav-link-mobile.active {
+    background-color: #eef2ff; /* Lighter blue for active mobile item background */
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.nav-link-mobile { /* Increased padding for better touch targets */
+    padding-top: 0.875rem; /* 14px */
+    padding-bottom: 0.875rem; /* 14px */
+}
+
+
+.content-section h2:first-child, 
+.content-section .prose > h2:first-child {
+    font-size: 1.75rem; 
+    font-weight: 600;
+    color: #1e293b; 
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem; /* Increased padding bottom */
+    border-bottom: 1px solid #e2e8f0; 
+}
+
+.content-section .prose h3 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #334155; 
+    margin-top: 2em; /* Increased top margin */
+    margin-bottom: 1em; /* Increased bottom margin */
+}
+
+.content-section .prose h4 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #475569; 
+    margin-top: 1.75em;
+    margin-bottom: 0.75em;
+}
+
+
+.accordion-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0.875rem 0.25rem; 
+    text-align: left;
+    font-weight: 600; 
+    font-size: 1.35rem; 
+    color: #334155; 
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #e2e8f0; 
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+.accordion-button:hover {
+    color: var(--accent-color);
+}
+
+.accordion-icon {
+    transition: transform 0.3s ease-in-out;
+    width: 1.25rem; 
+    height: 1.25rem; 
+}
+
+.accordion-icon.rotate-180 {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    padding: 1rem 0.25rem; 
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, padding 0.3s ease-in-out;
+    border-bottom: 1px solid #f1f5f9; 
+}
+
+.accordion-content.hidden {
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.prose {
+    line-height: 1.75; /* Tailwind's default leading-relaxed */
+}
+
+.prose p {
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+}
+
+.prose table {
+    width: 100%;
+    font-size: 0.875rem; /* 14px */
+}
+
+.prose th {
+    background-color: #f8fafc; /* slate-50, slightly lighter */
+    font-weight: 600; /* Semibold for table headers */
+}
+
+.prose th, .prose td {
+    border: 1px solid #e2e8f0; 
+    padding: 0.75rem 1rem; /* Increased padding in table cells */
+}
+
+.prose a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500; /* Medium weight for links */
+}
+
+.prose a:hover {
+    text-decoration: underline;
+    color: var(--accent-color-hover);
+}
+
+.prose ul > li::before {
+    background-color: #64748b; 
+}
+
+.prose strong {
+ color: #1e293b; 
+}
+
+mark.highlight {
+    background-color: #fef9c3; /* yellow-200, slightly lighter for subtlety */
+    color: #713f12; /* yellow-900, for better contrast on light yellow */
+    padding: 0.1em 0.25em;
+    border-radius: 0.25rem;
+}
+
+#mainNav ul {
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+}
+#mainNav ul::-webkit-scrollbar {
+    display: none; 
+}
+
+/* Ensure buttons and interactive elements have good focus states */
+button, input[type="search"], input[type="text"], select {
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+button:focus, input[type="search"]:focus, input[type="text"]:focus, select:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px var(--accent-color-hover);
+}
+
+#clearTimetableFilters {
+    background-color: #64748b; /* slate-500 */
+}
+#clearTimetableFilters:hover {
+    background-color: #475569; /* slate-600 */
+}
+#clearTimetableFilters:focus {
+    border-color: #94a3b8; /* slate-400 */
+    box-shadow: 0 0 0 2px #94a3b8;
+}
+
+/* Style for the timetable table specifically for scrollbars etc. */
+#course-timetable-content .overflow-x-auto {
+    border: 1px solid #e2e8f0; /* slate-200 */
+    border-radius: 0.375rem; /* rounded-md */
+}
+
